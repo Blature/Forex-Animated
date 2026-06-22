@@ -1,26 +1,176 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/*
+  STP Trading — tokens mapped from design-system/MASTER.md
+  Dark OLED, electric green/teal brand accent + restrained gold.
+  shadcn semantic tokens are remapped onto the MASTER palette below.
+*/
 
 @theme inline {
+  /* shadcn semantic surface/text */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* STP brand tokens (MASTER §2) -> Tailwind utilities (bg-brand, text-up, …) */
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-press: var(--brand-press);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  /* typography (MASTER §3) */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-inter-tight);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* radius (MASTER §4.4) — lg = 16px */
+  --radius-sm: calc(var(--radius) * 0.5);  /* ~8px  */
+  --radius-md: calc(var(--radius) * 0.75); /* ~12px */
+  --radius-lg: var(--radius);              /* 16px  */
+  --radius-xl: calc(var(--radius) * 1.5);  /* 24px  */
+  --radius-2xl: calc(var(--radius) * 2);   /* 32px  */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Dark-first: :root carries the only (OLED) theme; .dark mirrors it. */
+:root,
+.dark {
+  color-scheme: dark;
+
+  /* raw surfaces (MASTER §2.1) */
+  --bg-deep: #05070a;
+  --surface-1: #0d1117;
+  --surface-2: #141a22;
+  --surface-3: #1b232e;
+  --overlay: rgba(5, 7, 10, 0.72);
+
+  /* brand accent — electric green/teal (MASTER §2.3) */
+  --brand: #00e5a0;
+  --brand-hover: #00f5ad;
+  --brand-press: #00c488;
+  --brand-deep: #0b6e55;
+  --brand-foreground: #04130e;
+  --brand-glow: rgba(0, 229, 160, 0.22);
+  --brand-tint: rgba(0, 229, 160, 0.08);
+
+  /* restrained gold (MASTER §2.4) */
+  --gold: #d4af37;
+  --gold-soft: #c8a951;
+  --gold-tint: rgba(212, 175, 55, 0.1);
+
+  /* market / system semantics (MASTER §2.5) */
+  --up: #16c784;
+  --down: #ea3943;
+  --success: #16c784;
+  --warning: #e0a526;
+  --info: #3b9eff;
+
+  /* shadcn semantic tokens -> MASTER values */
+  --background: #080b10;
+  --foreground: #f2f5f8;
+  --card: var(--surface-1);
+  --card-foreground: #f2f5f8;
+  --popover: var(--surface-2);
+  --popover-foreground: #f2f5f8;
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --secondary: var(--surface-2);
+  --secondary-foreground: #f2f5f8;
+  --muted: var(--surface-2);
+  --muted-foreground: #a4b0bd;
+  --accent: var(--surface-3); /* shadcn hover-surface accent (NOT brand) */
+  --accent-foreground: #f2f5f8;
+  --destructive: var(--down);
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: var(--brand);
+
+  /* chart palette — accessible categorical (no red/green-only reliance) */
+  --chart-1: var(--brand);
+  --chart-2: var(--info);
+  --chart-3: var(--gold);
+  --chart-4: var(--up);
+  --chart-5: #8aa0b4;
+
+  /* radius base (MASTER lg = 16px) */
+  --radius: 1rem;
+
+  /* motion tokens (MASTER §5.1) */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-quart: cubic-bezier(0.4, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv01";
+  }
+  h1, h2, h3 {
+    @apply font-heading;
+    letter-spacing: -0.02em;
+  }
+  /* tabular figures for all financial/numeric data (MASTER §3.1) */
+  .tabular-nums,
+  table,
+  .font-mono,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* reduced motion (MASTER §5.4) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
