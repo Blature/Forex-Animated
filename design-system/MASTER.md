@@ -14,7 +14,7 @@
 |-----------|----------|
 | **Mood** | Dark OLED base · premium · institutional · trustworthy · precision |
 | **Base** | Near-black layered OLED surfaces (deep, calm, low emission) |
-| **Primary accent** | Electric green/teal — the financial "up" color, used for primary action & key emphasis |
+| **Primary accent** | Vivid red — bold, confident brand signature, used for primary action & key emphasis |
 | **Secondary accent** | Restrained gold — premium/VIP/award highlights ONLY, never for large fills |
 | **Feel** | Bloomberg-terminal calm meets modern SaaS polish |
 
@@ -52,16 +52,16 @@ Elevation is expressed by **lightening the surface**, not by heavy shadows.
 | `--fg-subtle` | `#6B7785` | 4.6:1 | Captions, placeholders, meta (min size 13px) |
 | `--fg-disabled` | `#3A434E` | — | Disabled text (pair with `opacity` + semantics) |
 
-### 2.3 Brand Accent — Electric Green / Teal (the "up" color)
+### 2.3 Brand Accent — Vivid Red
 | Token | Hex | Use |
 |-------|-----|-----|
-| `--accent` | `#00E5A0` | Primary CTA, active states, key highlights, focus ring |
-| `--accent-hover` | `#00F5AD` | Hover (brighter) |
-| `--accent-press` | `#00C488` | Pressed/active |
-| `--accent-deep` | `#0B6E55` | Gradient anchor, borders, low-emphasis fills |
-| `--on-accent` | `#04130E` | Text/icons ON the green CTA (near-black for AA) |
-| `--accent-glow` | `rgba(0,229,160,0.22)` | Restrained glow behind primary CTA / focus halo |
-| `--accent-tint` | `rgba(0,229,160,0.08)` | Faint background wash for selected/active rows |
+| `--accent` | `#FF3B47` | Primary CTA, active states, key highlights, focus ring |
+| `--accent-hover` | `#FF5C66` | Hover (brighter) |
+| `--accent-press` | `#E22A36` | Pressed/active |
+| `--accent-deep` | `#7E141C` | Gradient anchor, borders, low-emphasis fills |
+| `--on-accent` | `#1A0608` | Text/icons ON the red CTA (near-black for AA, ≈5.7:1) |
+| `--accent-glow` | `rgba(255,59,71,0.22)` | Restrained glow behind primary CTA / focus halo |
+| `--accent-tint` | `rgba(255,59,71,0.08)` | Faint background wash for selected/active rows |
 
 ### 2.4 Secondary Accent — Restrained Gold (premium highlight)
 > Use sparingly: VIP tier, awards/regulation badges, "Premium" labels, decorative hairlines. **Never** a large fill, never a primary CTA.
@@ -83,14 +83,14 @@ Elevation is expressed by **lightening the surface**, not by heavy shadows.
 | `--danger` | `#EA3943` | Errors, destructive actions |
 | `--info` | `#3B9EFF` | Neutral informational |
 
-> Brand accent (`#00E5A0`, teal-green) is intentionally a different hue from the market `--up` green (`#16C784`) so "buy/up" data never gets confused with "this is a button."
+> Brand accent (`#FF3B47`) is a saturated signature red, kept brighter than the muted market `--down` red (`#EA3943`); the market `--up` green (`#16C784`) still carries the primary data contrast. Context (CTA/brand chrome vs price arrow) disambiguates the two reds — never use the brand red to mean "loss".
 
 ### 2.6 Borders & Lines
 | Token | Value | Use |
 |-------|-------|-----|
 | `--border` | `rgba(255,255,255,0.08)` | Default hairline border (cards, dividers) |
 | `--border-strong` | `rgba(255,255,255,0.14)` | Inputs, emphasized separation |
-| `--border-accent` | `rgba(0,229,160,0.35)` | Active/focused input & selected card |
+| `--border-accent` | `rgba(255,59,71,0.35)` | Active/focused input & selected card |
 | `--grid-line` | `rgba(255,255,255,0.05)` | Chart gridlines (low-contrast, never compete with data) |
 
 ### 2.7 Locked CSS variables (copy verbatim into `globals.css`)
@@ -106,10 +106,10 @@ Elevation is expressed by **lightening the surface**, not by heavy shadows.
   /* text */
   --fg:#F2F5F8; --fg-muted:#A4B0BD; --fg-subtle:#6B7785; --fg-disabled:#3A434E;
 
-  /* brand accent (electric green/teal) */
-  --accent:#00E5A0; --accent-hover:#00F5AD; --accent-press:#00C488;
-  --accent-deep:#0B6E55; --on-accent:#04130E;
-  --accent-glow:rgba(0,229,160,0.22); --accent-tint:rgba(0,229,160,0.08);
+  /* brand accent (vivid red) */
+  --accent:#FF3B47; --accent-hover:#FF5C66; --accent-press:#E22A36;
+  --accent-deep:#7E141C; --on-accent:#1A0608;
+  --accent-glow:rgba(255,59,71,0.22); --accent-tint:rgba(255,59,71,0.08);
 
   /* gold highlight (restrained) */
   --gold:#D4AF37; --gold-soft:#C8A951; --gold-tint:rgba(212,175,55,0.10); --on-gold:#0B0A04;
@@ -120,7 +120,7 @@ Elevation is expressed by **lightening the surface**, not by heavy shadows.
 
   /* borders */
   --border:rgba(255,255,255,0.08); --border-strong:rgba(255,255,255,0.14);
-  --border-accent:rgba(0,229,160,0.35); --grid-line:rgba(255,255,255,0.05);
+  --border-accent:rgba(255,59,71,0.35); --grid-line:rgba(255,255,255,0.05);
 }
 ```
 
@@ -249,7 +249,7 @@ Rules: micro-interactions 150–300ms · complex ≤400ms · **never >500ms** fo
 | **Number roll** | Animate digit count-up on stat reveal (≤400ms, ease-out, tnum so no width jump). |
 | **Section reveal** | Fade + `translateY(12px→0)`, ease-out 320ms, stagger 40ms per item. Once, on scroll-in. |
 | **Glass nav** | Sticky header: `backdrop-blur(16px)` over `rgba(8,11,16,0.7)` + bottom hairline border. Blur used for hierarchy, not decoration. |
-| **Accent gradient** | Allowed: `--accent` → `--accent-deep` (teal-green) for hero glow/borders. Gold only as thin gradient hairline on premium cards. **No purple/pink, ever.** |
+| **Accent gradient** | Allowed: `--accent` → `--accent-deep` (red) for hero glow/borders. Gold only as thin gradient hairline on premium cards. **No purple/pink, ever** (keep the red true red — never let it drift toward magenta/pink). |
 
 ### 5.4 Accessibility (always)
 ```css
@@ -286,7 +286,7 @@ Institutional credibility is the conversion driver. Every relevant page must sur
 
 ## 8. Locked-token summary (the four things you asked to lock)
 
-1. **Colors** — §2. Brand `--accent #00E5A0` (electric teal-green) + restrained `--gold #D4AF37`; OLED surfaces `#05070A → #1B232E`; market `--up #16C784` / `--down #EA3943`. No purple/pink.
+1. **Colors** — §2. Brand `--accent #FF3B47` (vivid red) + restrained `--gold #D4AF37`; OLED surfaces `#05070A → #1B232E`; market `--up #16C784` / `--down #EA3943`. No purple/pink.
 2. **Typography** — §3. `Inter Tight` (display) · `Inter` (body) · `JetBrains Mono` (data), all with tabular-nums for figures.
 3. **Spacing** — §4. 4px base / 8px rhythm `0·4·8·12·16·24·32·48·64·96·128`; sections 96–128px; radii `8·12·16·24`.
 4. **Animation/Effects** — §5. ease-out `(0.16,1,0.3,1)`, 150–320ms, transform/opacity only, restrained accent glow + glass nav + ticker/price-flash, reduced-motion honored. No casino motion.
