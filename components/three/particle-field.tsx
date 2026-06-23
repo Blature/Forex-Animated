@@ -13,7 +13,7 @@ import * as THREE from "three";
  * Colors are baked into the WebGL buffer (CSS tokens can't reach the GPU), but
  * the hexes mirror MASTER §2.3/§2.4 exactly.
  */
-const BRAND = new THREE.Color("#00E5A0"); // --brand
+const BRAND = new THREE.Color("#FF3B47"); // --brand
 const GOLD = new THREE.Color("#D4AF37"); // --gold (sparse, premium hint)
 const PALE = new THREE.Color("#9FB4C4"); // cool foreground, for depth
 

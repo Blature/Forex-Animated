@@ -78,14 +78,14 @@
   --surface-3: #1b232e;
   --overlay: rgba(5, 7, 10, 0.72);
 
-  /* brand accent — electric green/teal (MASTER §2.3) */
-  --brand: #00e5a0;
-  --brand-hover: #00f5ad;
-  --brand-press: #00c488;
-  --brand-deep: #0b6e55;
-  --brand-foreground: #04130e;
-  --brand-glow: rgba(0, 229, 160, 0.22);
-  --brand-tint: rgba(0, 229, 160, 0.08);
+  /* brand accent — vivid red on OLED base */
+  --brand: #ff3b47;
+  --brand-hover: #ff5c66;
+  --brand-press: #e22a36;
+  --brand-deep: #7e141c;
+  --brand-foreground: #1a0608;
+  --brand-glow: rgba(255, 59, 71, 0.22);
+  --brand-tint: rgba(255, 59, 71, 0.08);
 
   /* restrained gold (MASTER §2.4) */
   --gold: #d4af37;
