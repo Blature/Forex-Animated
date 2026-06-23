@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/providers/smooth-scroll";
+import { AuroraBackground } from "@/components/background/aurora-background";
+import { SiteHeader } from "@/components/sections/site-header";
+import { SiteFooter } from "@/components/sections/site-footer";
 
 // Typography — design-system/MASTER.md §3
 const inter = Inter({
@@ -40,7 +44,14 @@ export default function RootLayout({
       lang="en"
       className={`dark ${inter.variable} ${interTight.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AuroraBackground />
+        <SiteHeader />
+        <SmoothScroll>
+          {children}
+          <SiteFooter />
+        </SmoothScroll>
+      </body>
     </html>
   );
 }
